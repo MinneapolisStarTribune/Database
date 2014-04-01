@@ -70,7 +70,8 @@ class ezcDatabaseTransactionsTest extends ezcTestCase
     {
         try
         {
-            $dbparams = ezcTestSettings::getInstance()->db->dsn;
+            //$dbparams = ezcTestSettings::getInstance()->db->dsn;
+            $dbparams = 'sqlite://:memory:'; 
             MyDB::setParams( $dbparams );
             $this->db = MyDB::create();
         }
