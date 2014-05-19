@@ -72,7 +72,7 @@ class ezcDbInstance
      * @see ezcDbInstance::get()
      * @var string
      */
-    static private $DefaultInstanceIdentifier = false;
+    static private $DefaultInstanceIdentifier = 'sqlite://:memory:';
 
     /**
      * Holds the database instances.
@@ -103,6 +103,10 @@ class ezcDbInstance
         if ( $identifier === false && self::$DefaultInstanceIdentifier )
         {
             $identifier = self::$DefaultInstanceIdentifier;
+            if(!isset(self::$Instances[$identifier])) {
+                $db = ezcDbFactory::create( 'sqlite://:memory:' );
+                self::set($db, $identifier);
+            }
         }
 
         if ( !isset( self::$Instances[$identifier] ) )
